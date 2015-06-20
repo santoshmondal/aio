@@ -1,0 +1,34 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="test" namespace="/" extends="struts-default">
+		<action name="add" class="com.rediff.actions.HelloValidations"
+			method="add">
+			<result>home.jsp</result>
+			<result name="input">index.jsp</result>
+		</action>
+		
+		<action name="edit" class="com.rediff.actions.HelloValidations"
+			method="edit">
+			<result>home.jsp</result>
+			<result name="input">index.jsp</result>
+			<interceptor-ref name="validation">
+			    <param name="excludeMethods">edit</param>
+			</interceptor-ref>
+		</action>
+		
+		<action name="test123">
+		    <result>test123.jsp</result>
+		</action>
+		
+		
+		<action name="hello" class="com.rediff.actions.TestValid" method="hello">
+		    <result name="success">home.jsp</result>
+		    <result name="input">home.jsp</result>
+		</action>
+	</package>
+
+</struts>

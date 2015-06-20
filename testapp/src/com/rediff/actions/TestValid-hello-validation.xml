@@ -1,0 +1,16 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+ "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    	<field name="name">
+    	    <field-validator type="required">
+    	        <message>Name is required</message> 
+    	    </field-validator>
+    	</field>
+    	
+    	<field name="id">
+    	    <field-validator type="int">
+    	        <param name="min">5</param>
+    	        <message>ID is required</message> 
+    	    </field-validator>
+    	</field>
+</validators>    
