@@ -4,8 +4,9 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
+	<constant name="struts.devMode" value="true" />
 
-	<package name="image" namespace="/Image" extends="struts-default">
+	<package name="image" namespace="/" extends="struts-default">
 
 		<result-types>
 			<result-type name="imageResult"
@@ -13,7 +14,7 @@
 		</result-types>
 
 		<action name="Display" class="com.mkyong.image.action.DisplayAction">
-			<result>pages/display.jsp</result>
+			<result>/Image/pages/display.jsp</result>
 		</action>
 
 		<action name="ImageAction" class="com.mkyong.image.action.ImageAction">
