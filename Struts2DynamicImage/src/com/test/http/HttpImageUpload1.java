@@ -14,6 +14,11 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 
 
+/**
+ * http://stackoverflow.com/questions/1378920/how-can-i-make-a-multipart-form-data-post-request-using-java
+ * @author santoshm
+ *
+ */
 public class HttpImageUpload1 {
 	public static void main(String[] args) throws Exception{
 		doupload();
