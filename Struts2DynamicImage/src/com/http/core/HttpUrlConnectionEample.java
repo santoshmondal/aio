@@ -27,7 +27,8 @@ public class HttpUrlConnectionEample {
 		// doGetRequest();
 		// doPostRequest();
 		// doPostRequestBodyAsString();
-		doPostRequestMultipart();
+		//doPostRequestMultipart();
+		doPostRequestMultipartWithFormData();
 	}
 
 	public static void doGetRequest() throws Exception {
@@ -128,8 +129,64 @@ public class HttpUrlConnectionEample {
 		FileInputStream f = new FileInputStream(imageFile);
 		byte[] picFile = new byte[f.available()];
 		f.read(picFile);
-
 		request.write(picFile);
+		
+		request.writeBytes(crlf);
+		request.writeBytes(twoHyphens + boundary + twoHyphens + crlf);
+
+		request.flush();
+		request.close();
+
+		int responseCode = urlConnection.getResponseCode();
+		String response = processResponse(responseCode, urlConnection.getInputStream());
+		System.out.println("RESPONSE FROM SERVER :: " + response);
+	}
+	
+	
+	public static void doPostRequestMultipartWithFormData() throws Exception {
+		URL url = new URL("http://localhost:8080/Struts2DynamicImage/rest/helloPostAsMultiPart/1");
+
+		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+		urlConnection.setRequestMethod("POST");
+		urlConnection.setReadTimeout(10000);
+		urlConnection.setConnectTimeout(15000);
+		urlConnection.setDoInput(true);
+		urlConnection.setDoOutput(true);
+
+		urlConnection.setRequestProperty("Connection", "Keep-Alive");
+		urlConnection.setRequestProperty("Cache-Control", "no-cache");
+		urlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+
+		String fieldName = "pic";
+		String fileName = "abc.jpg";
+
+		DataOutputStream request = new DataOutputStream(urlConnection.getOutputStream());
+		request.writeBytes(twoHyphens + boundary + crlf);
+		request.writeBytes("Content-Disposition: form-data; name=\"" + fieldName + "\";filename=\"" + fileName + "\"" + crlf);
+		request.writeBytes(crlf);
+
+		String imgFile = "/home/santoshm/Pictures/days.jpg";
+		File imageFile = new File(imgFile);
+		FileInputStream f = new FileInputStream(imageFile);
+		byte[] picFile = new byte[f.available()];
+		f.read(picFile);
+		request.write(picFile);
+		
+		// PARAM 1
+		request.writeBytes(crlf);
+		request.writeBytes(twoHyphens + boundary + crlf);
+		request.writeBytes("Content-Disposition: form-data; name=\"name\";" + crlf);
+		request.writeBytes(crlf);
+		request.writeBytes("HELLO");
+		
+		// PARAM 2
+		request.writeBytes(crlf);
+		request.writeBytes(twoHyphens + boundary + crlf);
+		request.writeBytes("Content-Disposition: form-data; name=\"fname\";" + crlf);
+		request.writeBytes(crlf);
+		request.writeBytes("HELLO FNAME");
+		
+		// END CONTAINER
 		request.writeBytes(crlf);
 		request.writeBytes(twoHyphens + boundary + twoHyphens + crlf);
 
@@ -173,4 +230,6 @@ public class HttpUrlConnectionEample {
 
 		return response;
 	}
+	
+	
 }

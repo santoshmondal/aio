@@ -91,7 +91,11 @@ public class HelloRest {
 		MultivaluedMap<String, String> pathParameters = uriInfo.getPathParameters();
 		String uid = pathParameters.getFirst("uid");
 		
+		// param1
 		FormDataBodyPart nameField = formParams.getField("name");
+		// param2
+		FormDataBodyPart fnameField = formParams.getField("fname");
+		
 		FormDataBodyPart pic = formParams.getField("pic");
 		ContentDisposition contentDisposition = pic.getContentDisposition();
 		BodyPartEntity ipic = (BodyPartEntity)pic.getEntity();
@@ -100,6 +104,7 @@ public class HelloRest {
 		String temp = "";
 		if(nameField != null) {
 			temp = nameField.getValue();
+			System.out.println(nameField.getValue() + "::" + fnameField.getValue());
 		}
 		
 		return Response.ok("helloPostAsMultiPart :: " + uid + " :: " + temp).build();
