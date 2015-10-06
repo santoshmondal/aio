@@ -13,6 +13,11 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.glassfish.jersey.media.multipart.BodyPartEntity;
+import org.glassfish.jersey.media.multipart.ContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+
 @Path("/")
 public class HelloRest {
 	@Context
@@ -72,6 +77,23 @@ public class HelloRest {
 		String uid = pathParameters.getFirst("uid");
 		
 		return Response.ok("helloPostParam :: " + uid).build();
+	}
+	
+	
+	@POST
+	@Path("/helloPostAsMultiPart/{uid}")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response helloPostAsMultiPart(FormDataMultiPart formParams) {
+		MultivaluedMap<String, String> pathParameters = uriInfo.getPathParameters();
+		String uid = pathParameters.getFirst("uid");
+		
+		FormDataBodyPart nameField = formParams.getField("name");
+		FormDataBodyPart pic = formParams.getField("pic");
+		ContentDisposition contentDisposition = pic.getContentDisposition();
+		BodyPartEntity ipic = (BodyPartEntity)pic.getEntity();
+		System.out.println(ipic.getInputStream() + "::" + contentDisposition.getFileName());
+		
+		return Response.ok("helloPostAsMultiPart :: " + uid + " :: " + nameField.getValue()).build();
 	}
 	
 }
