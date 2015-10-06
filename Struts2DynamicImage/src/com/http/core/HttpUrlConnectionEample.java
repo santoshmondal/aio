@@ -2,6 +2,9 @@ package com.http.core;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -16,10 +19,15 @@ import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
 
 public class HttpUrlConnectionEample {
+	private static String crlf = "\r\n";
+	private static String twoHyphens = "--";
+	private static String boundary = "*****";
+
 	public static void main(String[] args) throws Exception {
-		doGetRequest();
+		// doGetRequest();
 		// doPostRequest();
 		// doPostRequestBodyAsString();
+		doPostRequestMultipart();
 	}
 
 	public static void doGetRequest() throws Exception {
@@ -86,6 +94,47 @@ public class HttpUrlConnectionEample {
 		writer.flush();
 		writer.close();
 		os.close();
+
+		int responseCode = urlConnection.getResponseCode();
+		String response = processResponse(responseCode, urlConnection.getInputStream());
+		System.out.println("RESPONSE FROM SERVER :: " + response);
+	}
+
+	public static void doPostRequestMultipart() throws Exception {
+		URL url = new URL("http://localhost:8080/Struts2DynamicImage/rest/helloPostAsMultiPart/1");
+
+		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+		urlConnection.setRequestMethod("POST");
+		urlConnection.setReadTimeout(10000);
+		urlConnection.setConnectTimeout(15000);
+		urlConnection.setDoInput(true);
+		urlConnection.setDoOutput(true);
+
+		urlConnection.setRequestProperty("Connection", "Keep-Alive");
+		urlConnection.setRequestProperty("Cache-Control", "no-cache");
+		urlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+
+		String fieldName = "pic";
+		String fileName = "abc.jpg";
+
+		DataOutputStream request = new DataOutputStream(urlConnection.getOutputStream());
+		request.writeBytes(twoHyphens + boundary + crlf);
+		request.writeBytes(
+				"Content-Disposition: form-data; name=\"" + fieldName + "\";filename=\"" + fileName + "\"" + crlf);
+		request.writeBytes(crlf);
+
+		String imgFile = "/home/santoshm/Pictures/days.jpg";
+		File imageFile = new File(imgFile);
+		FileInputStream f = new FileInputStream(imageFile);
+		byte[] picFile = new byte[f.available()];
+		f.read(picFile);
+
+		request.write(picFile);
+		request.writeBytes(crlf);
+		request.writeBytes(twoHyphens + boundary + twoHyphens + crlf);
+
+		request.flush();
+		request.close();
 
 		int responseCode = urlConnection.getResponseCode();
 		String response = processResponse(responseCode, urlConnection.getInputStream());

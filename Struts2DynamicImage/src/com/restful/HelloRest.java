@@ -18,6 +18,10 @@ import org.glassfish.jersey.media.multipart.ContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 
+/*
+ * http://stackoverflow.com/questions/11766878/sending-files-using-post-with-httpurlconnection
+ */
+
 @Path("/")
 public class HelloRest {
 	@Context
@@ -93,7 +97,12 @@ public class HelloRest {
 		BodyPartEntity ipic = (BodyPartEntity)pic.getEntity();
 		System.out.println(ipic.getInputStream() + "::" + contentDisposition.getFileName());
 		
-		return Response.ok("helloPostAsMultiPart :: " + uid + " :: " + nameField.getValue()).build();
+		String temp = "";
+		if(nameField != null) {
+			temp = nameField.getValue();
+		}
+		
+		return Response.ok("helloPostAsMultiPart :: " + uid + " :: " + temp).build();
 	}
 	
 }
