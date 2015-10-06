@@ -1,4 +1,4 @@
-package com.test.http;
+package com.http.core;
 
 import java.io.File;
 import java.io.IOException;
