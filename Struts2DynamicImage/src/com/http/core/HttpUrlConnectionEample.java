@@ -19,9 +19,9 @@ import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
 
 public class HttpUrlConnectionEample {
-	private static String crlf = "\r\n";
-	private static String twoHyphens = "--";
-	private static String boundary = "*****";
+	private static String CRLF = "\r\n";
+	private static String TWO_HYPHENS = "--";
+	private static String BOUNDARY = "*****";
 
 	public static void main(String[] args) throws Exception {
 		// doGetRequest();
@@ -113,16 +113,16 @@ public class HttpUrlConnectionEample {
 
 		urlConnection.setRequestProperty("Connection", "Keep-Alive");
 		urlConnection.setRequestProperty("Cache-Control", "no-cache");
-		urlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+		urlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + BOUNDARY);
 
 		String fieldName = "pic";
 		String fileName = "abc.jpg";
 
 		DataOutputStream request = new DataOutputStream(urlConnection.getOutputStream());
-		request.writeBytes(twoHyphens + boundary + crlf);
+		request.writeBytes(TWO_HYPHENS + BOUNDARY + CRLF);
 		request.writeBytes(
-				"Content-Disposition: form-data; name=\"" + fieldName + "\";filename=\"" + fileName + "\"" + crlf);
-		request.writeBytes(crlf);
+				"Content-Disposition: form-data; name=\"" + fieldName + "\";filename=\"" + fileName + "\"" + CRLF);
+		request.writeBytes(CRLF);
 
 		String imgFile = "/home/santoshm/Pictures/days.jpg";
 		File imageFile = new File(imgFile);
@@ -131,8 +131,8 @@ public class HttpUrlConnectionEample {
 		f.read(picFile);
 		request.write(picFile);
 		
-		request.writeBytes(crlf);
-		request.writeBytes(twoHyphens + boundary + twoHyphens + crlf);
+		request.writeBytes(CRLF);
+		request.writeBytes(TWO_HYPHENS + BOUNDARY + TWO_HYPHENS + CRLF);
 
 		request.flush();
 		request.close();
@@ -155,15 +155,15 @@ public class HttpUrlConnectionEample {
 
 		urlConnection.setRequestProperty("Connection", "Keep-Alive");
 		urlConnection.setRequestProperty("Cache-Control", "no-cache");
-		urlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+		urlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + BOUNDARY);
 
 		String fieldName = "pic";
 		String fileName = "abc.jpg";
 
 		DataOutputStream request = new DataOutputStream(urlConnection.getOutputStream());
-		request.writeBytes(twoHyphens + boundary + crlf);
-		request.writeBytes("Content-Disposition: form-data; name=\"" + fieldName + "\";filename=\"" + fileName + "\"" + crlf);
-		request.writeBytes(crlf);
+		request.writeBytes(TWO_HYPHENS + BOUNDARY + CRLF);
+		request.writeBytes("Content-Disposition: form-data; name=\"" + fieldName + "\";filename=\"" + fileName + "\"" + CRLF);
+		request.writeBytes(CRLF);
 
 		String imgFile = "/home/santoshm/Pictures/days.jpg";
 		File imageFile = new File(imgFile);
@@ -173,22 +173,22 @@ public class HttpUrlConnectionEample {
 		request.write(picFile);
 		
 		// PARAM 1
-		request.writeBytes(crlf);
-		request.writeBytes(twoHyphens + boundary + crlf);
-		request.writeBytes("Content-Disposition: form-data; name=\"name\";" + crlf);
-		request.writeBytes(crlf);
+		request.writeBytes(CRLF);
+		request.writeBytes(TWO_HYPHENS + BOUNDARY + CRLF);
+		request.writeBytes("Content-Disposition: form-data; name=\"name\";" + CRLF);
+		request.writeBytes(CRLF);
 		request.writeBytes("HELLO");
 		
 		// PARAM 2
-		request.writeBytes(crlf);
-		request.writeBytes(twoHyphens + boundary + crlf);
-		request.writeBytes("Content-Disposition: form-data; name=\"fname\";" + crlf);
-		request.writeBytes(crlf);
+		request.writeBytes(CRLF);
+		request.writeBytes(TWO_HYPHENS + BOUNDARY + CRLF);
+		request.writeBytes("Content-Disposition: form-data; name=\"fname\";" + CRLF);
+		request.writeBytes(CRLF);
 		request.writeBytes("HELLO FNAME");
 		
 		// END CONTAINER
-		request.writeBytes(crlf);
-		request.writeBytes(twoHyphens + boundary + twoHyphens + crlf);
+		request.writeBytes(CRLF);
+		request.writeBytes(TWO_HYPHENS + BOUNDARY + TWO_HYPHENS + CRLF);
 
 		request.flush();
 		request.close();
