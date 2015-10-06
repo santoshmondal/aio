@@ -1,6 +1,8 @@
 package com.restful;
 
 
+import java.io.InputStream;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import javax.ws.rs.Consumes;
@@ -108,6 +110,14 @@ public class HelloRest {
 		}
 		
 		return Response.ok("helloPostAsMultiPart :: " + uid + " :: " + temp).build();
+	}
+	
+	@POST
+	@Path("/helloPostFile/{uid}")
+	@Consumes(MediaType.WILDCARD)
+	public Response helloPostBodyAsStream(InputStream is) {
+		System.out.println(is);
+		return Response.ok("POST A FILE").build();
 	}
 	
 }

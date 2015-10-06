@@ -24,8 +24,8 @@ public class OkHttpExample {
 		// doGetRequest();
 		// doPostRequest();
 		// doPostRequestBodyAsString();
-		doPostRequestMultipart();
-		// doPostRequestMultipartWithFormData();
+		//doPostRequestMultipart(); 
+		postingAFile();
 	}
 
 	public static void doGetRequest() throws Exception {
@@ -82,10 +82,10 @@ public class OkHttpExample {
 
 	public static void doPostRequestMultipart() throws Exception {
 		MediaType MEDIA_TYPE_PNG = MediaType.parse("image/jpeg");
-		
+
 		String imgFile = "/home/santoshm/Pictures/days.jpg";
 		File imageFile = new File(imgFile);
-		
+
 		RequestBody requestBody = new MultipartBuilder().type(MultipartBuilder.FORM)
 				.addPart(Headers.of("Content-Disposition", "form-data; name=\"name\""),
 						RequestBody.create(null, "Square Logo"))
@@ -105,7 +105,19 @@ public class OkHttpExample {
 		System.out.println(response.body().string());
 	}
 
-	
+	public static void postingAFile() throws Exception{
+		File file = new File("/home/santoshm/Pictures/days.jpg");
+
+		String url = "http://localhost:8080/Struts2DynamicImage/rest/helloPostFile/1";
+		Request request = new Request.Builder().url(url)
+				.post(RequestBody.create(MEDIA_TYPE_MARKDOWN, file)).build();
+
+		Response response = client.newCall(request).execute();
+		if (!response.isSuccessful())
+			throw new IOException("Unexpected code " + response);
+
+		System.out.println(response.body().string());
+	}
 
 	private static String getPostDataString(Map<String, String> params) throws UnsupportedEncodingException {
 		StringBuilder result = new StringBuilder();
