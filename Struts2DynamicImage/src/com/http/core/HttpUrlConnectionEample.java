@@ -13,6 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,14 +25,15 @@ public class HttpUrlConnectionEample {
 	private static String BOUNDARY = "*****";
 
 	public static void main(String[] args) throws Exception {
-		// doGetRequest();
+		 doGetRequest();
 		// doPostRequest();
 		// doPostRequestBodyAsString();
 		//doPostRequestMultipart();
-		doPostRequestMultipartWithFormData();
+		//doPostRequestMultipartWithFormData();
 	}
 
 	public static void doGetRequest() throws Exception {
+		String credentials = "java";
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("fname", "JAVA PROGRAMMING");
 		String postParams = getPostDataString(params);
@@ -44,6 +46,9 @@ public class HttpUrlConnectionEample {
 		urlConnection.setConnectTimeout(15000);
 		urlConnection.setDoInput(true);
 		urlConnection.setDoOutput(true);
+		String basicAuth = new String(Base64.getEncoder().encode(credentials.getBytes()));
+		urlConnection.setRequestProperty ("uid", credentials);
+		urlConnection.setRequestProperty ("auth", basicAuth);
 
 		int responseCode = urlConnection.getResponseCode();
 		String response = processResponse(responseCode, urlConnection.getInputStream());

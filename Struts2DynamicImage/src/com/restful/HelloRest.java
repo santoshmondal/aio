@@ -2,6 +2,7 @@ package com.restful;
 
 
 import java.io.InputStream;
+import java.util.Base64;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
@@ -10,6 +11,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
@@ -30,6 +32,8 @@ public class HelloRest {
 	private HttpServletRequest request;
 	@Context
 	private UriInfo uriInfo;
+	@Context 
+	private HttpHeaders headers;
 	
 	
 	@GET
@@ -59,6 +63,21 @@ public class HelloRest {
 	@Path("/helloGetParam/{uid}")
 	public Response helloGetParam() {
 		String paaram1 = uriInfo.getQueryParameters().getFirst("fname");
+		
+		String uid = headers.getRequestHeaders().getFirst("uid");
+		String auth = headers.getRequestHeaders().getFirst("auth");
+		if(uid == null || auth == null){
+			System.out.println("INVALID");
+		} else {
+			String basicAuth = new String(Base64.getEncoder().encode(uid.getBytes()));
+			if(auth.equals(basicAuth)) {
+				System.out.println("VALID");
+			} else {
+				System.out.println("INVALID");
+			}
+		}
+		
+		System.out.println(auth);
 		return Response.ok("helloGetParam!!" + paaram1).build();
 	}
 	
