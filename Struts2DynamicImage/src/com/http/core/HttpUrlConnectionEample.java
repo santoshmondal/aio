@@ -13,7 +13,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +35,10 @@ public class HttpUrlConnectionEample {
 	}
 
 	public static void doGetRequest() throws Exception {
-		String credentials = "java";
+		String uid = "java";
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+		String dFormat = sdf.format(Calendar.getInstance().getTime());
+		
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("fname", "JAVA PROGRAMMING");
 		String postParams = getPostDataString(params);
@@ -46,8 +51,9 @@ public class HttpUrlConnectionEample {
 		urlConnection.setConnectTimeout(15000);
 		urlConnection.setDoInput(true);
 		urlConnection.setDoOutput(true);
-		String basicAuth = new String(Base64.getEncoder().encode(credentials.getBytes()));
-		urlConnection.setRequestProperty ("uid", credentials);
+		
+		String basicAuth = new String(Base64.getEncoder().encode((dFormat+uid).getBytes()));
+		urlConnection.setRequestProperty ("uid", uid);
 		urlConnection.setRequestProperty ("auth", basicAuth);
 
 		int responseCode = urlConnection.getResponseCode();
