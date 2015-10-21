@@ -7,10 +7,8 @@
 	<constant name="struts.devMode" value="true" />
 
 	<package name="image" namespace="/" extends="struts-default">
-
 		<result-types>
-			<result-type name="imageResult"
-				class="com.mkyong.image.result.CustomImageBytesResult" />
+			<result-type name="imageResult" class="com.mkyong.image.result.CustomImageBytesResult" />
 		</result-types>
 
 		<action name="Display" class="com.mkyong.image.action.DisplayAction">
@@ -21,7 +19,27 @@
 			<result name="success" type="imageResult">
 			</result>
 		</action>
+	</package>
 
+
+	<!-- REDIRECT_TEST_PACKAGE -->
+	<package name="redirect_test" namespace="/" extends="struts-default">
+		<action name="helloAction" class="com.struts.restulttype.test.HelloAction">
+			<result  type="redirectAction">
+				<param name="actionName">anotherAction</param>
+				<param name="namespace">/</param>
+				
+				<param name="req.msg">${req.msg}</param>
+				<param name="req.msgs">${req.msgs}</param>
+				<param name="req.person.id">${req.person.id}</param>
+				<param name="req.person.name">${req.person.name}</param>
+			</result>
+		</action>
+
+		<action name="anotherAction" class="com.struts.restulttype.test.AnotherAction">
+			<result name="success">
+			</result>
+		</action>
 	</package>
 
 </struts>
