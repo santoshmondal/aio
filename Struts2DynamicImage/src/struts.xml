@@ -40,6 +40,10 @@
 			<result name="success">
 			</result>
 		</action>
+		
+		<action name="abcAction" class="com.struts.restulttype.test.AbcAction">
+			<result name="success">/redirectest.jsp</result>
+		</action>
 	</package>
 
 </struts>
