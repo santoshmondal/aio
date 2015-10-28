@@ -35,8 +35,12 @@ public class SamplePdf {
 	private static void createPDF(OfficeDocumentConverter converter) {
 		try {
 			long start = System.currentTimeMillis();
-			converter.convert(new File("docx/AppBody-Sample-English.docx"), new File("pdf/AppBody-Sample-English.pdf"));
-			System.err.println("Generate pdf/AppBody-Sample-English.pdf with " + (System.currentTimeMillis() - start) + "ms");
+			// converter.convert(new File("docx/AppBody-Sample-English.docx"), new File("pdf/AppBody-Sample-English.pdf"));
+			// converter.convert(new File("docx/test.doc"), new File("pdf/test.pdf"));
+			// converter.convert(new File("docx/anexcel1.xlsx"), new File("pdf/anexcel1.pdf"));
+			converter.convert(new File("docx/apresent1.pptx"), new File("pdf/apresent1.pdf"));
+			System.err.println(
+					"Generate pdf with " + (System.currentTimeMillis() - start) + "ms");
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
