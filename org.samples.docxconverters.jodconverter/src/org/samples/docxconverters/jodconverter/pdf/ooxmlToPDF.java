@@ -13,14 +13,12 @@ public class ooxmlToPDF {
 		// 1) Start LibreOffice in headless mode.
 		OfficeManager officeManager = null;
 		try {
-			officeManager = new DefaultOfficeManagerConfiguration()
-					.setOfficeHome(new File("C:/Program Files/LibreOffice 3.5"))
+			officeManager = new DefaultOfficeManagerConfiguration().setOfficeHome(new File("/usr/lib/libreoffice"))
 					.buildOfficeManager();
 			officeManager.start();
 
 			// 2) Create JODConverter converter
-			OfficeDocumentConverter converter = new OfficeDocumentConverter(
-					officeManager);
+			OfficeDocumentConverter converter = new OfficeDocumentConverter(officeManager);
 
 			// 3) Create PDF
 			createPDF(converter);
@@ -37,10 +35,8 @@ public class ooxmlToPDF {
 	private static void createPDF(OfficeDocumentConverter converter) {
 		try {
 			long start = System.currentTimeMillis();
-			converter.convert(new File("docx/ooxml.docx"), new File(
-					"pdf/ooxml.pdf"));
-			System.err.println("Generate pdf/ooxml.pdf with "
-					+ (System.currentTimeMillis() - start) + "ms");
+			converter.convert(new File("docx/ooxml.docx"), new File("pdf/ooxml.pdf"));
+			System.err.println("Generate pdf/ooxml.pdf with " + (System.currentTimeMillis() - start) + "ms");
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}

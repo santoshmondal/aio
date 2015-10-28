@@ -13,14 +13,12 @@ public class Docx4j_GettingStartedToPDF {
 		// 1) Start LibreOffice in headless mode.
 		OfficeManager officeManager = null;
 		try {
-			officeManager = new DefaultOfficeManagerConfiguration()
-					.setOfficeHome(new File("C:/Program Files/LibreOffice 3.5"))
+			officeManager = new DefaultOfficeManagerConfiguration().setOfficeHome(new File("/usr/lib/libreoffice"))
 					.buildOfficeManager();
 			officeManager.start();
 
 			// 2) Create JODConverter converter
-			OfficeDocumentConverter converter = new OfficeDocumentConverter(
-					officeManager);
+			OfficeDocumentConverter converter = new OfficeDocumentConverter(officeManager);
 
 			// 3) Create PDF
 			createPDF(converter);
@@ -37,10 +35,9 @@ public class Docx4j_GettingStartedToPDF {
 	private static void createPDF(OfficeDocumentConverter converter) {
 		try {
 			long start = System.currentTimeMillis();
-			converter.convert(new File("docx/Docx4j_GettingStarted.docx"), new File(
-					"pdf/Docx4j_GettingStarted.pdf"));
-			System.err.println("Generate pdf/Docx4j_GettingStarted.pdf with "
-					+ (System.currentTimeMillis() - start) + "ms");
+			converter.convert(new File("docx/Docx4j_GettingStarted.docx"), new File("pdf/Docx4j_GettingStarted.pdf"));
+			System.err.println(
+					"Generate pdf/Docx4j_GettingStarted.pdf with " + (System.currentTimeMillis() - start) + "ms");
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
