@@ -37,7 +37,7 @@ public class OkHttpExample {
 
 	private static void downloadFile() throws Exception {
 		String url = "http://localhost:8080/samweb/rest/getfile.do";
-		String postBody = "{\"samreq\":{\"fileid\":\"/test/IntelliJIDEA.pdf\"}}";
+		String postBody = "{\"samreq\":{\"fileid\":\"/test/IntelliJIDEA.pdf\", \"macid\":\"78:ac:c0:43:d9:fe\", \"userid\":\"demo\"}}";
 
 		Request request = new Request.Builder().url(url).post(RequestBody.create(MEDIA_TYPE_JSON, postBody))
 				.build();
