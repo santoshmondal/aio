@@ -1,7 +1,7 @@
 var first = require('./my_modules/first');
 var second = require("./my_modules/second");
 var circle = require("./my_modules/circle");
-const circle2 = require('./my_modules/circle2.js');
+var circle2 = require('./my_modules/circle2.js');
 
 
 
@@ -17,8 +17,7 @@ console.log(second.method21());
 console.log(circle.area1(2));
 console.log(circle.area2(3));
 
-console.log( `The area of a circle of radius 4 is ${circle2.area(4)} `);
+// MODULE circle2
 console.log(circle2.test(4));
-
-console.log(circle2.test1(4));
+console.log(circle2.test1(5));
 
