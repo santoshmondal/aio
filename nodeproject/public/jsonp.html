@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<title>JSONP Example</title>
+		<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+	</head>
+	
+	<body>
+		Hello World!!
+		
+		<script type="text/javascript">
+			(function($) {
+					var url = 'http://localhost:3000/test?callback=jsonCallback';
+	
+					$.ajax({
+					   type: 'GET',
+					    url: url,
+					    async: false,
+					    jsonpCallback: 'jsonCallback',
+					    contentType: "application/json",
+					    dataType: 'jsonp',
+					    success: function(json) {
+					       console.log(json);
+					    },
+					    error: function(e) {
+					       console.log(e.message);
+					    }
+					});
+	
+			})(jQuery);
+		</script>
+	</body>
+</html>
