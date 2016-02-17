@@ -13,9 +13,26 @@ app.use(express.static('public'));
 mongoose.connect('mongodb://localhost/test');
 
 
+app.use(function(req, res, next){
+	console.log("FILTER 1");
+	app.set("filter1", req.originalUrl);
+	next();
+});
+
+app.use(function(req, res, next){
+	console.log("FILTER 2");
+	app.set("filter2", req.baseUrl);
+	next();
+});
+
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/abc', function(req, res) {
-  res.send('hello world');
+	  var resp = {
+			  		"title" : "hello world",
+			  		"filter1" : app.get("filter1"),
+			  		"filter2" : app.get("filter2")
+	  };
+	  res.send(resp);
 });
 
 
@@ -28,12 +45,14 @@ app.get("/dbref", function(req, res){
 		  console.log('meow');
 		  res.send('meow error');
 	  } else {
-		  res.send('bhaw bhaw success');
+		  var resp = {
+			  		"title" : "hello world",
+			  		"filter1" : app.get("filter1"),
+			  		"filter2" : app.get("filter2")
+		  };
+		  res.send(resp);
 	  }
 	});
-	
-	
-
 });
 
 
