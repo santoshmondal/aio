@@ -19,22 +19,16 @@ var app = express();
 
 // middleware initializaion
 app.use(express.static('public'));
-app.use(passport.initialize());
-
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
-
-
-
-
-// All Middlewares APIS
+app.use(passport.initialize());
 app.use(router);
 
 
 // All Apis
 app.post("/login",function(req, res, next){
 	console.log(req.body);
-	if(!req.body.username || !req.body.password){
+	if(!req.body.uname || !req.body.pname){
 	    return res.status(400).json({message: 'Please fill out all fields'});
 	 }
 	
@@ -50,6 +44,8 @@ app.post("/login",function(req, res, next){
 	    }
 	 })(req, res, next);
 });
+
+
 
 
 app.use("/mod1", mod1);
