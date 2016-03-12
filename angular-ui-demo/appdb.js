@@ -7,7 +7,7 @@ var mongoose=require('mongoose');
 var routedbs=require('./sampledbs/routedbs');
 
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/test1');
 
 
 
