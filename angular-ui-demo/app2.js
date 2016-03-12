@@ -37,7 +37,6 @@ app.post("/uploads", upload.single('pic'), function(req, res,next) {
 	    });
 	    
 	    console.log(dirname + "/" + path);
-	    console.log(dirname + "/" + path);
 	    fs.createReadStream(dirname + "/" + path).pipe(writestream);
 	 
 	    writestream.on('close', function (file) {
@@ -45,13 +44,11 @@ app.post("/uploads", upload.single('pic'), function(req, res,next) {
 	    });
 	});
 	
-	
-	console.log(reqfile);
 	console.log(reqfile);
 	res.json(reqfile);
 });
 
 
 app.listen(4000, function(){
-	console.log("hello world!!!");
+	console.log("hello world Test!!!");
 });
