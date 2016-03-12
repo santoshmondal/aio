@@ -45,6 +45,8 @@ app.post("/uploads", upload.single('pic'), function(req, res,next) {
 	    });
 	});
 	
+	
+	console.log(reqfile);
 	console.log(reqfile);
 	res.json(reqfile);
 });
