@@ -44,11 +44,11 @@ app.post("/uploads", upload.single('pic'), function(req, res,next) {
 	    });
 	});
 	
-	console.log(reqfile);
+	
 	res.json(reqfile);
 });
 
 
 app.listen(4000, function(){
-	console.log("hello world Latest!!!");
+	console.log("hello world Latest vivek!!!");
 });
