@@ -50,5 +50,5 @@ app.post("/uploads", upload.single('pic'), function(req, res,next) {
 
 
 app.listen(4000, function(){
-	
+	console.log("hello");
 });
