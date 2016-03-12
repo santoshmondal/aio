@@ -37,6 +37,7 @@ app.post("/uploads", upload.single('pic'), function(req, res,next) {
 	    });
 	    
 	    console.log(dirname + "/" + path);
+	    console.log(dirname + "/" + path);
 	    fs.createReadStream(dirname + "/" + path).pipe(writestream);
 	 
 	    writestream.on('close', function (file) {
