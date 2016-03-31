@@ -33,7 +33,6 @@ app.post("/uploads", upload.single('pic'), function(req, res,next) {
 	    var writestream = gfs.createWriteStream({
 	        'filename': reqfile.originalname,
 	        "metadata" : reqfile
-	        
 	    });
 	    
 	    console.log(dirname + "/" + path);
