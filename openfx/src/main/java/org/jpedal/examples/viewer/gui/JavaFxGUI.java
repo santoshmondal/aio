@@ -1350,7 +1350,19 @@ public class JavaFxGUI extends GUI implements GUIFactory {
          */
         menuItems.createMainMenu(true, currentCommandListener, isSingle, commonValues, currentCommands, fxButtons);
         topPane.getChildren().add(((JavaFXMenuItems) menuItems).getCurrentMenuFX());
+        
 
+        Button btn = new Button("Hello World");
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Yes, Hello World!!");
+			}
+		});
+		
+		topPane.getChildren().add(btn);
+        
+        
         /**
          * This is where we add the Buttons for the top ToolBar
          */
@@ -4141,9 +4153,21 @@ public class JavaFxGUI extends GUI implements GUIFactory {
             System.out.println("createMainViewerWindow : DONE ");
         }
 
-        root.setTop(topPane);
-        root.setCenter(center);
-        root.setBottom(navButtons);
+        //root.setTop(topPane);
+        //root.setCenter(center);
+        //root.setBottom(navButtons);
+        
+        BorderPane b1 = new BorderPane();
+        b1.setTop(topPane);
+        b1.setCenter(center);
+        b1.setBottom(navButtons);
+       
+        
+        
+        root.setLeft(b1);
+        
+        Button b2 = new Button("Button_AT_Right_Side");
+        root.setRight(b2);
 
         if (stage != null) {
             scene = new Scene(root, width, height);

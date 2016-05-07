@@ -1015,7 +1015,8 @@ public class JavaFXOpenFile {
         final FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
         chooser.getExtensionFilters().add(extFilter);
 
-        file = chooser.showOpenDialog((Stage)currentGUI.getFrame());
+        // file = chooser.showOpenDialog((Stage)currentGUI.getFrame());
+        file = new File("/Users/santosh/Documents/webp.pdf");
 
         /**
          * decode

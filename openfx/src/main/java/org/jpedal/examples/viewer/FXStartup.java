@@ -78,6 +78,7 @@ public class FXStartup extends Application {
         checkUserJavaVersion();
         launch(args);
     }
+    
     @Override
     //Initalising the stage for the SplashScreen
      public void init()
