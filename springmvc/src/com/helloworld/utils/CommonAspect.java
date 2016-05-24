@@ -5,8 +5,8 @@ public class CommonAspect {
 		System.out.println("LOG REQUEST!!");
 	}
 	
-	public void logRequestAdvice1(String sname) {
-		System.out.println("LOG REQUEST1!! :: " + sname);
+	public void logRequestAdvice1(String param1) {
+		System.out.println("LOG REQUEST1!! :: " + param1);
 	}
 	
 	public void afterMethodAdvice() {

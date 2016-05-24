@@ -80,4 +80,11 @@
     	</property>
     	
     </bean>
+    
+    
+    <!-- byType -->
+    <bean name="sample3" class="com.dac.Sample" autowire="byType">
+    	<property name="name" value="property By Type"></property>
+    </bean>
+    
 </beans>    

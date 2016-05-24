@@ -29,7 +29,8 @@ public class MAIN {
 		Test1 test1 = (Test1)context.getBean("demo1");
 		System.out.println(test1);
 		
-		
+		Sample obj6 = (Sample)context.getBean("sample3");
+		System.out.println(obj6);
 		
 	}
 }
