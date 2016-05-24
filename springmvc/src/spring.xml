@@ -20,6 +20,9 @@
 	        <aop:pointcut id="pointcutID" expression="execution(* com.helloworld.utils.HelloSpring.*(..))" />
 	        <aop:before pointcut-ref="pointcutID" method="logRequestAdvice"/>
 	        <aop:after pointcut-ref="pointcutID" method="afterMethodAdvice"/>
+	        
+	        <aop:pointcut id="pointcutID1" expression="execution(* com.helloworld.utils.HelloSpring.*(..)) and args(sname))" />
+	        <aop:before pointcut-ref="pointcutID1" method="logRequestAdvice1"/>
 	    </aop:aspect>
 	</aop:config>
 	
