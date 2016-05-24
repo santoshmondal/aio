@@ -25,5 +25,11 @@ public class MAIN {
 		Sample obj5 = (Sample)context.getBean("sample2");
 		System.out.println(obj5);
 		
+		
+		Test1 test1 = (Test1)context.getBean("demo1");
+		System.out.println(test1);
+		
+		
+		
 	}
 }
